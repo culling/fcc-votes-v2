@@ -13,6 +13,7 @@ import ProfileContainer from "./Containers/ProfileContainer.jsx";
 import PollsContainer   from "./Containers/PollsContainer.jsx";
 
 //Modals
+import NewPollModal     from "./Modals/NewPollModal.jsx";
 import NewUserModal     from "./Modals/NewUserModal.jsx";
 import LoginUserModal   from "./Modals/LoginUserModal.jsx";
 
@@ -89,6 +90,7 @@ class ReactContainer extends React.Component{
                         </div>
                     }
                 </header>
+                    <NewPollModal />
                     <NewUserModal />
                     <LoginUserModal getUser={ this._getUser.bind(this) } />
 

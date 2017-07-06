@@ -47,6 +47,13 @@ class PrimaryNavbar extends React.Component{
     };
 
 
+    _newPollClicked(){
+        console.log("new Poll Clicked");
+        jQuery('#new-poll-modal').modal('open');
+        //this._hideAllContainers();
+    };
+
+
     _logoutClicked(){
         console.log("logout Clicked");
     }
@@ -67,6 +74,8 @@ class PrimaryNavbar extends React.Component{
                         <ul className="right hide-on-med-and-down">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>}
+                            <li  onClick={ this._newPollClicked.bind(this)}><a href="#" >New Poll</a></li>
+
                             <li  onClick={ this._pollsClicked.bind(this)}><a >Polls</a></li>                            {/*<li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>*/}
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="#" >Log In</a></li>}

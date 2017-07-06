@@ -13,8 +13,18 @@ var pollController = require("./../controllers/poll.controller.server");
 
 router.get('/', function(req, res){
     console.log("/api/poll - GET hit");
-    pollController.findAll(function(found){
+    pollController.findAll(function(err, found){
+        if(err){console.error(err)};
+        console.log("found all");
         res.write(JSON.stringify(found, null, "\t"));
+        res.end();
+    });
+});
+
+router.get('/drop', function(req, res){
+    console.log("/api/poll/drop - GET hit");
+    pollController.drop(function(response){
+        res.write(response);
         res.end();
     });
 });

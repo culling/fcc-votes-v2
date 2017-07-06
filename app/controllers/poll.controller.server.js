@@ -23,15 +23,19 @@ exports.findAll = function (done){
         .populate("meeting")
         .populate("owner")
         .exec(function(err, foundPolls){
-            if(err){ console.error(err)};
-        done(foundPolls);
-    });
+            if(err){ 
+                console.error(err)
+                done(err, null);
+                return;
+            };
+            done(null, foundPolls);
+        });
 };
 
 
 exports.drop = function(done){
     console.log("drop Hit - Poll Controller");    
-    PollModel.collection.drop(done());
+    PollModel.collection.drop(done("dropped"));
 }
 
 exports.create = function(poll, done){
