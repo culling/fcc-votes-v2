@@ -4,7 +4,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-
+//Cards
+import PollCard from './../Cards/PollCard.jsx';
 
 class PollsContainer extends React.Component{
 
@@ -50,14 +51,7 @@ class PollsContainer extends React.Component{
                 <div>
                     {this.state.polls.map((poll, i)=> {
                         return(
-                        <div className="poll-card" key={i}>
-                            <ul>
-                                <li>Owner: <b>{poll.owner}</b></li>
-                                <li>Name: {poll.name}</li>
-                                <li>Question: {poll.question}</li>
-                                <li>Meeting: {poll.meeting}</li>
-                            </ul>
-                        </div>
+                            <PollCard key={i} poll={poll} user={this.props.user}  detailsState="details-div-hidden"/>
                         )
                     } )}
                 </div>

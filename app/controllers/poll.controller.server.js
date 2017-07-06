@@ -45,3 +45,23 @@ exports.create = function(poll, done){
     });
 };
 
+exports.update = function (poll, done){
+    console.log("update Hit - Poll Controller");    
+    PollModel.findByIdAndUpdate(poll._id, poll, function(err, result){
+        if(err){
+            console.error(err);
+            return done(err, null);
+        }
+        done(null, result);
+    });
+}
+
+exports.delete = function(pollId, done){
+    PollModel.findByIdAndRemove(pollId, function(err, result){
+        if(err){
+            console.error(err)
+            return done(err, null);
+        }
+        return done(null, err);
+    });
+}

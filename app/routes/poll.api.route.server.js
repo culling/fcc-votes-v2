@@ -23,21 +23,34 @@ router.post('/', function(req, res){
     console.log("/api/poll - POST hit");    
     var poll = req.body;
     poll.owner = req.user;
-
-    //console.log("Poll: ");
-    //console.log(poll);
     pollController.create(poll, function(err, result){
         if(err){
             console.error(err);
         }
-
         res.write(JSON.stringify( result, null, "\t"));
         res.end();
-
     });
+});
 
+router.delete("/:id", function(req, res){
+    console.log("/api/poll/:id - DELETE hit");    
+    var pollId = req.params.id;
+    //console.log(pollId);
+    pollController.delete(pollId, function(err, result){
+        if(err){console.error(err)}
+        res.write("complete");
+        res.end();
+    });
+});
 
-})
-
+router.post("/update", function(req, res){
+    console.log("/api/poll/update - POST hit");    
+    var poll = req.body;
+    pollController.update(poll, function(err, result){
+        if(err){console.error(err)};
+        res.write(JSON.stringify (result, null, "\t"));
+        res.end();
+    });
+});
 
 module.exports = router;

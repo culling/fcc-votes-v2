@@ -16,7 +16,6 @@
     "dev-be": "nodemon ./server.js",
     "dev-db": "npm run vsc-run-mongo",
     "dev-db-config": "npm run vsc-config-mongo",
-
     "github-push": "git push origin master"
   },
   "dependencies": {
@@ -29,13 +28,13 @@
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
+    "d3": "^4.9.1",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "mongodb": "^2.2.28",
     "mongoose": "^4.10.6",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-masonry-component": "^5.0.7",
@@ -46,8 +45,6 @@
     "foreman": "^2.0.0",
     "nodemon": "^1.11.0"
   },
-
-
   "author": "Gene Culling",
   "license": "ISC"
 }

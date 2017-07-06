@@ -30,14 +30,14 @@ var Schema = mongoose.Schema;
 var PollSchema = new Schema ({
     name:       String,
     question:   String,
-    options:    Array,
-    open:       {
-        type:  Boolean,
-        default: true
+    responseOptions:    Array,
+    votingOpen:       {
+        type:       Boolean,
+        default:    true
     },
     created:    {
         type:       Date,
-        default:    Date.now()
+        default:    new Date
     },
     comments:   Array,
     owner:      {

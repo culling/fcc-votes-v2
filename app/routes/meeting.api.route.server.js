@@ -30,9 +30,8 @@ router.post('/', function(req, res){
         res.write(JSON.stringify( result, null, "\t"));
         res.end();
     });
+});
 
-
-})
 
 
 module.exports = router;
