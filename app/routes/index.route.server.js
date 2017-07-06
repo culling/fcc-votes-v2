@@ -7,7 +7,7 @@ var router          = express.Router();
 
 //Configs and Modules
 var config      = require("./../../config/config");
-var mongoExport = require("./../../config/mongo");
+
 
 var passport    = require("passport");
 

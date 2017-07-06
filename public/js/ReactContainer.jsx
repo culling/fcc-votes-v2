@@ -10,7 +10,7 @@ import PrimaryNavbar    from './Navbars/PrimaryNavbar.jsx';
 //Containers
 import HomeContainer    from "./Containers/HomeContainer.jsx";
 import ProfileContainer from "./Containers/ProfileContainer.jsx";
-//import BoardContainer   from "./Containers/BoardContainer.jsx";
+import PollsContainer   from "./Containers/PollsContainer.jsx";
 
 //Modals
 import NewUserModal     from "./Modals/NewUserModal.jsx";
@@ -26,8 +26,7 @@ class ReactContainer extends React.Component{
             containerIds:[
                 "#home-container",
                 "#profile-container",
-                "#myBoard-container",
-                "#allBoard-container"
+                "#polls-container"
             ]
 
         }
@@ -99,11 +98,11 @@ class ReactContainer extends React.Component{
                     {(this.state.activeContainer === "#profile-container")&&
                     <ProfileContainer       user={this.state.user} getUser={ this._getUser.bind(this) } />
                     }
-                    {/*(this.state.activeContainer === "#myBoard-container")&&
-                    <div id="myBoard-container" >
-                        <BoardContainer     user={this.state.user} filterUser={this.state.user} />
+                    {(this.state.activeContainer === "#polls-container")&&
+                    <div id="polls-container" >
+                        <PollsContainer     user={this.state.user} filterUser={{username:null, type:"all"}} />
                     </div>
-                    */}
+                    }
                     {/*(this.state.activeContainer === "#allBoard-container")&&
                     <div id="allBoard-container" >
                         <BoardContainer     user={this.state.user}  filterUser={{username:null, type:"all"}}/>

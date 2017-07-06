@@ -50,21 +50,15 @@ module.exports  = function(){
     //Passport
     app.use(passport.initialize());
     app.use(passport.session());
-    //app.use(flash());
 
-
-    //Views
-    //app.set("views", "./app/views");
-    //app.set("view engine", "ejs");
 
     //Routes
-    /*
-    var post = require("./../app/routes/post.route.server");
-    app.use("/api/post", post);
+    var meeting = require("./../app/routes/meeting.api.route.server");
+    app.use("/api/meeting", meeting);
 
-    var api = require("./../app/routes/api.route.server");
-    app.use("/api", api);
-    */
+    var poll = require("./../app/routes/poll.api.route.server");
+    app.use("/api/poll", poll);
+
     var user = require("./../app/routes/user.api.route.server");
     app.use("/api/user", user);
 
