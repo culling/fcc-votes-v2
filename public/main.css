@@ -14,33 +14,38 @@ nav{
 
 /*https://medium.com/@_jh3y/how-to-pure-css-masonry-layouts-a8ede07ba31a */
 
-@media(min-width: 1200){
-  .poll-card{
-    column-count: 4;
-    column-gap: 5px;
-  }
+
+@media (min-width: 1200px) {
+    .poll-card{
+        column-count: 4;
+        column-gap: 5px;
+
+    }
+}
+@media (max-width: 1200px) {
+    .poll-card{
+        column-count: 3;
+        column-gap: 5px;
+
+    }
+}
+@media (max-width: 767px) {
+    .poll-card{
+        column-count: 2;
+        column-gap: 5px;
+
+    }
 }
 
-@media(max-width: 1200){
-  .poll-card{
-    column-count: 3;
-    column-gap: 5px;
-  }
+@media (max-width: 767px) and (orientation: portrait) {
+    .poll-card{
+        column-count: 1;
+        column-gap: 5px;
+
+    }
 }
 
-@media(max-width: 760){ 
-  .poll-card{
-      column-count: 2;
-      column-gap: 5px;
-  }
-}
 
-@media(max-width: 760) and (orientation: portrait ){     
-  .poll-card{
-      column-count: 1;
-      column-gap: 5px;
-  }
-}
 
 .card-part{
     break-inside: avoid;

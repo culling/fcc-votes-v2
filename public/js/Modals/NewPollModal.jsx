@@ -139,22 +139,20 @@ class NewPollModal extends React.Component{
                             <label htmlFor="question">Question </label>
                         </div>
 
-                    <div className="form-group row">
-                        <label className="col-sm-2">Response Options</label>
-                        <div className="col-sm-10">
+                        <div>
+                            <label>Response Options</label>
                                 <ul>
                                     {this.state.newPoll.responseOptions.map((responseOption, i) =>  
                                     <ResponseOption key={i} responseOption={responseOption} onClick={() => this._removeResponseOption(i) } />
                                         ) }
                                 </ul>
-                                <div className="input-group">
-                                     <input type="text"     className="form-control" ref={(input) => this.newResponseOption = input }></input>
-                                    <button type="button"   className="btn btn-info" onClick={this._addResponseOption.bind(this)}>+</button>
-                                </div>
-
                         </div>
-                    </div>
-
+                        <div className="input-field">
+                            <i className="material-icons prefix"> </i>
+                            <input type="text"      id="newResponseOption" className="col s4"    ref={(input) => this.newResponseOption = input }></input>
+                            <label htmlFor="newResponseOption">New Response Option</label>
+                            <button type="button"   className="btn btn-info append" onClick={this._addResponseOption.bind(this)}>+</button>
+                        </div>
 
 
                 </div>
