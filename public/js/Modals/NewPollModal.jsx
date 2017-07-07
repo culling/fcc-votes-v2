@@ -135,8 +135,8 @@ class NewPollModal extends React.Component{
                         </div>
                         <div className="input-field">
                             <i className="material-icons prefix"> </i>
-                            <input type="question" name="question" id="question" required className="validate" />
-                            <label htmlFor="question" >Question </label>
+                            <input type="text" name="question" id="question" required/>
+                            <label htmlFor="question">Question </label>
                         </div>
 
                     <div className="form-group row">
