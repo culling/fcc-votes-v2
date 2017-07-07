@@ -47,9 +47,15 @@ class PrimaryNavbar extends React.Component{
     };
 
 
+    _newMeetingClicked(){
+        console.log("Polls Clicked");
+        this._showContainer("#newMeeting-container");
+    }
+
+
     _newPollClicked(){
         console.log("new Poll Clicked");
-        jQuery('#new-poll-modal').modal('open');
+        this._showContainer("#newPoll-container");
         //this._hideAllContainers();
     };
 
@@ -63,6 +69,11 @@ class PrimaryNavbar extends React.Component{
         this._showContainer("#polls-container");
     }
 
+    _meetingsClicked(){
+        console.log("Meetings Clicked");
+        this._showContainer("#meetings-container");
+    }
+
 
 
     render(){
@@ -74,11 +85,17 @@ class PrimaryNavbar extends React.Component{
                         <ul className="right hide-on-med-and-down">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>}
+
+                            <li  onClick={ this._newMeetingClicked.bind(this)}><a href="#" >New Meeting</a></li>
+
                             <li  onClick={ this._newPollClicked.bind(this)}><a href="#" >New Poll</a></li>
 
-                            <li  onClick={ this._pollsClicked.bind(this)}><a >Polls</a></li>                            {/*<li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>*/}
+                            <li  onClick={ this._meetingsClicked.bind(this)}><a >Meetings</a></li>
+
+                            <li  onClick={ this._pollsClicked.bind(this)}><a >Polls</a></li>
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="#" >Log In</a></li>}
+
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._signupClicked.bind(this)}><a href="#">Sign Up</a></li>}
 
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>}
@@ -87,9 +104,17 @@ class PrimaryNavbar extends React.Component{
                         <ul className="side-nav" id="mobile-menu">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>}
-                            <li  onClick={ this._pollsClicked.bind(this)}><a >Polls</a></li>                            {/*<li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>*/}
+
+                            <li  onClick={ this._newMeetingClicked.bind(this)}><a href="#" >New Meeting</a></li>
+
+                            <li  onClick={ this._newPollClicked.bind(this)}><a href="#" >New Poll</a></li>
+
+                            <li  onClick={ this._meetingsClicked.bind(this)}><a >Meetings</a></li>
+
+                            <li  onClick={ this._pollsClicked.bind(this)}><a >Polls</a></li>
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="#" >Log In</a></li>}
+
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._signupClicked.bind(this)}><a href="#">Sign Up</a></li>}
 
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>}

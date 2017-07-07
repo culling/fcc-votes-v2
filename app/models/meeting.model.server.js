@@ -40,7 +40,6 @@ var MeetingSchema = new Schema ({
     owner:      {
         type: Schema.Types.ObjectId,
         ref: "User",
-
     },
     purpose:    String
 });

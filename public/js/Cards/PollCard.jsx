@@ -12,9 +12,16 @@ class PollCard extends React.Component{
     constructor (props){
         super(props);
         this.state = ({
-            detailsState: props.detailsState
+            detailsState: props.detailsState,
+            displayState: "display-panel-hidden"
         });
     };
+
+    _showPane(){
+        let displayState = ((this.state.displayState === "display-panel-visible" )? "display-panel-hidden": "display-panel-visible");
+        this.setState({displayState: displayState });
+    }
+
 
     _showDetailsPane(){
         let detailsState = ((this.state.detailsState === "details-div-visible" )? "details-div-hidden": "details-div-visible");
@@ -77,102 +84,108 @@ class PollCard extends React.Component{
 
     render(){
         return(
-            <div className="poll-card">
-                <div className="card-part" id="my-graph">
-                    {/* Graph */}
-                    {this.props.poll.votes.length > 0 && 
-                        <VoteGraph poll={this.props.poll}  />
-                    }
-                    <br />
-                    <span className="card-title" style={{color: "black"}}>
-                        {this.props.poll.meeting &&
-                         this.props.poll.meeting +" - "+ this.props.poll.question} 
+            <div className="poll-card card">
 
-                        {(this.props.poll.meeting != true) &&
-                        this.props.poll.question} 
-                    </span>
-                </div>
-
-
-                {/* Vote Options */}
-                <div className="card-part">
-                    <ul>
-                        <div> {this.props.poll.responseOptions.map( (responseOption, i)=> 
-                            <ResponseOptionComponent key={i} 
-                            responseOption={responseOption}
-                            onClick = { ()=> this._voteNow({responseOption}, this.props.user.username )}
-                            poll={this.props.poll} /> )} 
-                        </div>
-
-
-                        {/*New Response Option*/}
-                        {this.props.user &&
-                        <div>
-                            {/*<label className="new-response">New Response Option</label>*/}
-                            <div className="input-group">                        
-                                <input type="text" name="newResponseOption" className="form-control" defaultValue="" placeholder="New Response Option" 
-                                ref={(input)=> this.newResponseOption = input} 
-                                ></input>
-                                <span className="input-group-btn">
-                                    <button className="btn btn-block btn-primary" onClick={this._newResponseOption.bind(this)}>Save</button>
-                                </span>
-                            </div>
-                        </div>
-                        }
-                    </ul>
-                </div>
-
-
-                {/* Warning for No Votes */}
-                {this.props.poll.votes.length == 0 && 
-                    <b> No votes taken yet </b>
-                }
-
-
-                {/* Votes History */}
-                {/*((this.props.poll.votes.length > 0) && this.props.user._id ) &&*/ 
-                <div className="card-part">
-                    <h4> Votes </h4>
-                    <ul> {d3.nest()
-                        .key(function(d) { return d.voteChoice; })
-                        .rollup(function(v) { return v.length; })
-                        .entries(this.props.poll.votes).map( (voteTotal, i ) => 
-                        <li key={i }>
-                            {voteTotal.key} : {voteTotal.value} 
-                        </li>) }
-                    </ul>
-
-                </div>
-                }
-
-
-
-
-
-
-                <div className="card-part">
                     {/*Details Button*/}
-                    <button className="vote-question btn btn-block" onClick={this._showDetailsPane.bind(this)}> 
+                    <button className="vote-question btn btn-block" onClick={this._showPane.bind(this)}> 
                         {this.props.poll.meeting &&
                          this.props.poll.meeting +" - "+ this.props.poll.question} 
 
                         {(this.props.poll.meeting != true) &&
                         this.props.poll.question} 
                     </button>
+                <div className={this.state.displayState}>
 
-                    <div className={this.state.detailsState}>
-                        <div>Question ID: {this.props.poll._id} </div>
-                        <div>Meeting: {this.props.poll.meeting} </div>
-                        <div>Poll Created On: {this.props.poll.created} </div>
-                        <div>Poll Created By: {this.props.poll.owner} </div>
-                        {(this.props.user.username == this.props.poll.owner) &&
-                            <button className="btn btn-danger" onClick={this._deletePoll.bind(this)}> DELETE THE POLL </button>
+                    <div className="card-part" id="my-graph">
+                        {/* Graph */}
+                        {this.props.poll.votes.length > 0 && 
+                            <VoteGraph poll={this.props.poll}  />
                         }
+                        <br />
+                        <span className="card-title" style={{color: "black"}}>
+                            {this.props.poll.meeting &&
+                            this.props.poll.meeting +" - "+ this.props.poll.question} 
+
+                            {(this.props.poll.meeting != true) &&
+                            this.props.poll.question} 
+                        </span>
                     </div>
-                </div> 
 
 
-                
+                    {/* Vote Options */}
+                    <div className="card-part">
+                        <ul>
+                            <div> {this.props.poll.responseOptions.map( (responseOption, i)=> 
+                                <ResponseOptionComponent key={i} 
+                                responseOption={responseOption}
+                                onClick = { ()=> this._voteNow({responseOption}, this.props.user.username )}
+                                poll={this.props.poll} /> )} 
+                            </div>
+
+
+                            {/*New Response Option*/}
+                            {this.props.user &&
+                            <div>
+                                {/*<label className="new-response">New Response Option</label>*/}
+                                <div className="input-group">                        
+                                    <input type="text" name="newResponseOption" className="form-control" defaultValue="" placeholder="New Response Option" 
+                                    ref={(input)=> this.newResponseOption = input} 
+                                    ></input>
+                                    <span className="input-group-btn">
+                                        <button className="btn btn-block btn-primary" onClick={this._newResponseOption.bind(this)}>Save</button>
+                                    </span>
+                                </div>
+                            </div>
+                            }
+                        </ul>
+                    </div>
+
+
+                    {/* Warning for No Votes */}
+                    {this.props.poll.votes.length == 0 && 
+                        <b> No votes taken yet </b>
+                    }
+
+
+                    {/* Votes History */}
+                    {/*((this.props.poll.votes.length > 0) && this.props.user._id ) &&*/ 
+                    <div className="card-part">
+                        <b> Votes </b>
+                        <ul> {d3.nest()
+                            .key(function(d) { return d.voteChoice; })
+                            .rollup(function(v) { return v.length; })
+                            .entries(this.props.poll.votes).map( (voteTotal, i ) => 
+                            <li key={i }>
+                                {voteTotal.key} : {voteTotal.value} 
+                            </li>) }
+                        </ul>
+
+                    </div>
+                    }
+
+
+
+
+
+
+                    <div className="card-part">
+                        {/*Details Button*/}
+                        <button className="vote-question btn btn-block" onClick={this._showDetailsPane.bind(this)}> 
+                            Display Details
+                        </button>
+                        
+
+                        <div className={this.state.detailsState}>
+                            <div>Question ID: {this.props.poll._id} </div>
+                            <div>Meeting: {this.props.poll.meeting} </div>
+                            <div>Poll Created On: {this.props.poll.created} </div>
+                            <div>Poll Created By: {this.props.poll.owner} </div>
+                            {(this.props.user.username == this.props.poll.owner) &&
+                                <button className="btn btn-danger" onClick={this._deletePoll.bind(this)}> DELETE THE POLL </button>
+                            }
+                        </div>
+                    </div> 
+                </div>
             </div>
         )
     }

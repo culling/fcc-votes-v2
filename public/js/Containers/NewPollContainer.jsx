@@ -3,9 +3,9 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import ResponseOption from './NewPollModal/ResponseOption.jsx';
+import ResponseOption from './NewPollContainer/ResponseOption.jsx';
 
-class NewPollModal extends React.Component{
+class NewPollContainer extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -77,13 +77,13 @@ class NewPollModal extends React.Component{
                 .add("#password")
                 .val("");
         
-        console.log(this.state.newPoll);
+        //console.log(this.state.newPoll);
 
         this.state.newPoll.responseOptions.map((responseOption) =>{
             formDataObject.responseOptions.push(responseOption);
         } );
         
-        console.log(JSON.stringify( formDataObject ));
+        //console.log(JSON.stringify( formDataObject ));
         jQuery.ajax({
             type: "POST",
             url: "/api/poll",
@@ -123,35 +123,42 @@ class NewPollModal extends React.Component{
 
     render(){
         return(
-            <div id="new-poll-modal" className="modal">
+            <div id="newPoll-container" >
                 <form id="NewPollForm">
                 <div className="modal-content">
                     <h4>New poll</h4>
 
-                        <div className="input-field">
-                            <i className="material-icons prefix"> </i>
-                            <input type="text" name="pollname" id="pollname" required />
-                            <label htmlFor="pollname" >Pollname </label>
-                        </div>
+
+
                         <div className="input-field">
                             <i className="material-icons prefix"> </i>
                             <input type="text" name="question" id="question" required/>
                             <label htmlFor="question">Question </label>
                         </div>
 
-                        <div>
-                            <label>Response Options</label>
+                        <div className="row">
+                            <div className="col s12">
+                            <b>Existing Response Options</b>
                                 <ul>
+                                    <div className="row">
                                     {this.state.newPoll.responseOptions.map((responseOption, i) =>  
-                                    <ResponseOption key={i} responseOption={responseOption} onClick={() => this._removeResponseOption(i) } />
-                                        ) }
+                                    <div key={i} >
+                                        {/*<i className="material-icons prefix"> </i>*/}
+                                        <ResponseOption responseOption={responseOption} onClick={() => this._removeResponseOption(i) } />
+                                    </div>
+                                    ) }
+                                    </div>
                                 </ul>
+                            </div>
                         </div>
-                        <div className="input-field">
-                            <i className="material-icons prefix"> </i>
-                            <input type="text"      id="newResponseOption" className="col s4"    ref={(input) => this.newResponseOption = input }></input>
-                            <label htmlFor="newResponseOption">New Response Option</label>
-                            <button type="button"   className="btn btn-info append" onClick={this._addResponseOption.bind(this)}>+</button>
+
+                        <div className="row">
+                            <div className="input-field col s8">
+                                <i className="material-icons prefix"> </i>
+                                <input type="text"      id="newResponseOption"      ref={(input) => this.newResponseOption = input }></input>
+                                <label htmlFor="newResponseOption" >New Response Option</label>
+                            </div>
+                                <button type="button"   className="btn btn-info s2" onClick={this._addResponseOption.bind(this)}>+</button>
                         </div>
 
 
@@ -169,5 +176,4 @@ class NewPollModal extends React.Component{
 
 
 
-export default NewPollModal;
-
+export default NewPollContainer;

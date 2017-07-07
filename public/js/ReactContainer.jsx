@@ -11,9 +11,12 @@ import PrimaryNavbar    from './Navbars/PrimaryNavbar.jsx';
 import HomeContainer    from "./Containers/HomeContainer.jsx";
 import ProfileContainer from "./Containers/ProfileContainer.jsx";
 import PollsContainer   from "./Containers/PollsContainer.jsx";
+import NewPollContainer from "./Containers/NewPollContainer.jsx";
+import MeetingsContainer   from "./Containers/MeetingsContainer.jsx";
+import NewMeetingContainer from "./Containers/NewMeetingContainer.jsx";
+
 
 //Modals
-import NewPollModal     from "./Modals/NewPollModal.jsx";
 import NewUserModal     from "./Modals/NewUserModal.jsx";
 import LoginUserModal   from "./Modals/LoginUserModal.jsx";
 
@@ -27,19 +30,30 @@ class ReactContainer extends React.Component{
             containerIds:[
                 "#home-container",
                 "#profile-container",
-                "#polls-container"
-            ]
+                "#polls-container",
+                "#newPoll-container",
+                "#meetings-container"
+            ],
+            meetings: []
 
         }
         //Binding to this for functions
         this._setActiveContainer = this._setActiveContainer.bind(this);
         this._getUser            = this._getUser.bind(this);
-
+        this._getPolls          = this._getPolls.bind(this);
+        this._getMeetings       = this._getMeetings.bind(this);
+        
     };
 
     componentWillMount(){
         this._getUser.bind(this);
         this._getUser();
+
+        this._getMeetings.bind(this);
+        this._getMeetings();
+
+        this._getPolls.bind(this);
+        this._getPolls();
     }
 
     componentDidMount(){
@@ -61,6 +75,32 @@ class ReactContainer extends React.Component{
             success: (user)=>{
                 this.setState({ user: user });
                 console.log(user);
+            },
+            contentType : "application/json",
+            dataType: "JSON"
+        });
+    };
+
+    _getMeetings(){
+        jQuery.ajax({
+            method: 'GET',
+            url:"/api/meeting",
+            success: (meetings)=>{
+                this.setState({ meetings: meetings });
+                console.log(meetings);
+            },
+            contentType : "application/json",
+            dataType: "JSON"
+        });
+    };
+
+    _getPolls(){
+        jQuery.ajax({
+            method: 'GET',
+            url:"/api/poll",
+            success: (polls)=>{
+                this.setState({ polls: polls });
+                console.log(polls);
             },
             contentType : "application/json",
             dataType: "JSON"
@@ -90,7 +130,7 @@ class ReactContainer extends React.Component{
                         </div>
                     }
                 </header>
-                    <NewPollModal />
+
                     <NewUserModal />
                     <LoginUserModal getUser={ this._getUser.bind(this) } />
 
@@ -100,17 +140,30 @@ class ReactContainer extends React.Component{
                     {(this.state.activeContainer === "#profile-container")&&
                     <ProfileContainer       user={this.state.user} getUser={ this._getUser.bind(this) } />
                     }
+
+                    {(this.state.activeContainer === "#meetings-container")&&
+                    <div id="meetings-container" >
+                        <MeetingsContainer     user={this.state.user}  />
+                    </div>
+                    }
+
                     {(this.state.activeContainer === "#polls-container")&&
                     <div id="polls-container" >
                         <PollsContainer     user={this.state.user} filterUser={{username:null, type:"all"}} />
                     </div>
                     }
-                    {/*(this.state.activeContainer === "#allBoard-container")&&
-                    <div id="allBoard-container" >
-                        <BoardContainer     user={this.state.user}  filterUser={{username:null, type:"all"}}/>
-                    </div>
-                    */}
 
+                    {(this.state.activeContainer === "#newPoll-container")&&
+                    <div id="newPoll-container" >
+                            <NewPollContainer />
+                    </div>
+                    }
+
+                    {(this.state.activeContainer === "#newMeeting-container")&&
+                    <div id="newMeeting-container" >
+                            <NewMeetingContainer />
+                    </div>
+                    }
 
             </div>
         )

@@ -28,7 +28,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var Schema = mongoose.Schema;
 
 var PollSchema = new Schema ({
-    name:       String,
+
     question:   String,
     responseOptions:    Array,
     votingOpen:       {
