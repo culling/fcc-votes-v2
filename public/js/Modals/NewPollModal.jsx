@@ -3,22 +3,27 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import ResponseOption from './NewPollContainer/ResponseOption.jsx';
+import ResponseOption from './NewPollModal/ResponseOption.jsx';
 
-class NewPollContainer extends React.Component{
+class NewPollModal extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             newPoll: {
                 responseOptions: []
-            }
+            },
+            meetings:[]
         }
     }
 
     componentWillMount(){
-        jQuery( document ).ready(function(){
+        jQuery(document).ready(function() {
             jQuery('.modal').modal();
+            jQuery('select').material_select();
         });
+
+
+        this._getMeeting();
     }
 
     _objectifyForm(formArray) {//serialize data function
@@ -28,8 +33,6 @@ class NewPollContainer extends React.Component{
         }
         return returnArray;
     };
-
-
 
     _sendUserMessage(newStateDiff) {
         //this.sendUserMessageToDB(newStateDiff);
@@ -59,19 +62,20 @@ class NewPollContainer extends React.Component{
     }
     //End _sendUserMessage
 
-
     _submitClicked(){
         console.log("Submit Clicked");
 
         let _this = this;
-        var userMessage = {user:  this.props.user,
-            message: "New user created"
-        };
+
         
         var formDataSerializedArray = jQuery("#NewPollForm").serializeArray();
         var formDataObject = this._objectifyForm(formDataSerializedArray);
         formDataObject.responseOptions = [];
-        //formDataObject.owner = this.props.user._id;
+
+        if (formDataObject.meeting._id == null){
+            delete formDataObject.meeting
+        }
+
         jQuery("#pollname")
                 .add("#question")
                 .add("#password")
@@ -90,11 +94,33 @@ class NewPollContainer extends React.Component{
             data: JSON.stringify(formDataObject ),
             success: function(){
                 console.log("Success");
-                //_this._getUser();
-                //_this._sendUserMessage(userMessage);
+
             },
             dataType: "text",
             contentType : "application/json"
+        });
+    }
+
+
+    _getMeeting(){
+        var _this = this;
+        jQuery.ajax({
+            method: 'GET',
+            url:"/api/meeting",
+            success: (meetings)=>{
+                var meetingsArray = JSON.parse(meetings);
+                console.log(meetingsArray);
+
+                if(meetingsArray.length == 0 ){
+                    meetings = {
+                        name:"New Meeting",
+                        _id: null
+                    }
+                }
+
+                _this.setState({meetings: meetingsArray });
+
+            }
         });
     }
 
@@ -119,47 +145,73 @@ class NewPollContainer extends React.Component{
     }
 
 
+    _editMeeting(){
+        let newPoll     = Object.assign( this.state.newPoll);
+        newPoll.meeting = this.meeting.value;
+        console.log("edit Meeting: " + newPoll.meeting);
+        this.setState({newPoll:newPoll});
+    }
+
 
 
     render(){
         return(
-            <div id="newPoll-container" >
-                <form id="NewPollForm">
+            <div id="new-poll-modal" className="modal">
+                <form id="NewPollForm"   >
                 <div className="modal-content">
                     <h4>New poll</h4>
 
 
 
+                   <b>Meeting</b>
+                        <div>
+                            <select name="meeting" >
+                                <optgroup label="No Meeting">
+                                    <option value="none">No Meeting</option>
+                                </optgroup>
+                                <optgroup label="Existing Meetings">
+
+                                    {this.props.meetings.map((meeting, i) => 
+                                        <option key={i} value={meeting._id}>{meeting.name}</option> 
+                                    )}
+                                </optgroup>
+
+                            </select>
+                        </div>
+
+
                         <div className="input-field">
-                            <i className="material-icons prefix"> </i>
                             <input type="text" name="question" id="question" required/>
                             <label htmlFor="question">Question </label>
                         </div>
 
+                        {(this.state.newPoll.responseOptions.length >0) &&
                         <div className="row">
                             <div className="col s12">
                             <b>Existing Response Options</b>
                                 <ul>
                                     <div className="row">
                                     {this.state.newPoll.responseOptions.map((responseOption, i) =>  
-                                    <div key={i} >
+                                    <span key={i} >
                                         {/*<i className="material-icons prefix"> </i>*/}
                                         <ResponseOption responseOption={responseOption} onClick={() => this._removeResponseOption(i) } />
-                                    </div>
+                                    </span>
                                     ) }
                                     </div>
                                 </ul>
                             </div>
                         </div>
+                        }
+
 
                         <div className="row">
                             <div className="input-field col s8">
-                                <i className="material-icons prefix"> </i>
                                 <input type="text"      id="newResponseOption"      ref={(input) => this.newResponseOption = input }></input>
                                 <label htmlFor="newResponseOption" >New Response Option</label>
                             </div>
                                 <button type="button"   className="btn btn-info s2" onClick={this._addResponseOption.bind(this)}>+</button>
                         </div>
+
 
 
                 </div>
@@ -176,4 +228,4 @@ class NewPollContainer extends React.Component{
 
 
 
-export default NewPollContainer;
+export default NewPollModal;

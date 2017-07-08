@@ -94,14 +94,10 @@ class PollCard extends React.Component{
                         {(this.props.poll.meeting != true) &&
                         this.props.poll.question} 
                     </button>
-                <div className={this.state.displayState}>
 
-                    <div className="card-part" id="my-graph">
-                        {/* Graph */}
-                        {this.props.poll.votes.length > 0 && 
-                            <VoteGraph poll={this.props.poll}  />
-                        }
-                        <br />
+
+
+                <div className={this.state.displayState}>
                         <span className="card-title" style={{color: "black"}}>
                             {this.props.poll.meeting &&
                             this.props.poll.meeting +" - "+ this.props.poll.question} 
@@ -109,6 +105,32 @@ class PollCard extends React.Component{
                             {(this.props.poll.meeting != true) &&
                             this.props.poll.question} 
                         </span>
+
+
+                    <div className="card-part" id="my-graph">
+                        {/* Graph */}
+                        {this.props.poll.votes.length > 0 && 
+                            <VoteGraph poll={this.props.poll}  />
+                        }
+
+
+                    {/* Votes History */}
+                    {/*((this.props.poll.votes.length > 0) && this.props.user._id ) &&*/ 
+                    <div className="card-part">
+                        <b> Votes </b>
+                        <ul> {d3.nest()
+                            .key(function(d) { return d.voteChoice; })
+                            .rollup(function(v) { return v.length; })
+                            .entries(this.props.poll.votes).map( (voteTotal, i ) => 
+                            <li key={i }>
+                                {voteTotal.key} : {voteTotal.value} 
+                            </li>) }
+                        </ul>
+
+                    </div>
+                    }
+
+
                     </div>
 
 
@@ -146,22 +168,6 @@ class PollCard extends React.Component{
                         <b> No votes taken yet </b>
                     }
 
-
-                    {/* Votes History */}
-                    {/*((this.props.poll.votes.length > 0) && this.props.user._id ) &&*/ 
-                    <div className="card-part">
-                        <b> Votes </b>
-                        <ul> {d3.nest()
-                            .key(function(d) { return d.voteChoice; })
-                            .rollup(function(v) { return v.length; })
-                            .entries(this.props.poll.votes).map( (voteTotal, i ) => 
-                            <li key={i }>
-                                {voteTotal.key} : {voteTotal.value} 
-                            </li>) }
-                        </ul>
-
-                    </div>
-                    }
 
 
 

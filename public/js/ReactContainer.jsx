@@ -11,7 +11,6 @@ import PrimaryNavbar    from './Navbars/PrimaryNavbar.jsx';
 import HomeContainer    from "./Containers/HomeContainer.jsx";
 import ProfileContainer from "./Containers/ProfileContainer.jsx";
 import PollsContainer   from "./Containers/PollsContainer.jsx";
-import NewPollContainer from "./Containers/NewPollContainer.jsx";
 import MeetingsContainer   from "./Containers/MeetingsContainer.jsx";
 import NewMeetingContainer from "./Containers/NewMeetingContainer.jsx";
 
@@ -19,7 +18,7 @@ import NewMeetingContainer from "./Containers/NewMeetingContainer.jsx";
 //Modals
 import NewUserModal     from "./Modals/NewUserModal.jsx";
 import LoginUserModal   from "./Modals/LoginUserModal.jsx";
-
+import NewPollModal     from "./Modals/NewPollModal.jsx";
 
 class ReactContainer extends React.Component{
 
@@ -31,7 +30,7 @@ class ReactContainer extends React.Component{
                 "#home-container",
                 "#profile-container",
                 "#polls-container",
-                "#newPoll-container",
+                "#newPoll-modal",
                 "#meetings-container"
             ],
             meetings: []
@@ -74,7 +73,7 @@ class ReactContainer extends React.Component{
             url:"/api/user",
             success: (user)=>{
                 this.setState({ user: user });
-                console.log(user);
+                //console.log(user);
             },
             contentType : "application/json",
             dataType: "JSON"
@@ -87,7 +86,7 @@ class ReactContainer extends React.Component{
             url:"/api/meeting",
             success: (meetings)=>{
                 this.setState({ meetings: meetings });
-                console.log(meetings);
+                //console.log(meetings);
             },
             contentType : "application/json",
             dataType: "JSON"
@@ -133,6 +132,9 @@ class ReactContainer extends React.Component{
 
                     <NewUserModal />
                     <LoginUserModal getUser={ this._getUser.bind(this) } />
+                    <NewPollModal   meetings={this.state.meetings} />
+                    
+
 
                     {(this.state.activeContainer === "#home-container")&&
                     <HomeContainer          user={this.state.user} twitterUser={this.state.twitterUser} />
@@ -153,12 +155,8 @@ class ReactContainer extends React.Component{
                     </div>
                     }
 
-                    {(this.state.activeContainer === "#newPoll-container")&&
-                    <div id="newPoll-container" >
-                            <NewPollContainer />
-                    </div>
-                    }
-
+                    
+                    
                     {(this.state.activeContainer === "#newMeeting-container")&&
                     <div id="newMeeting-container" >
                             <NewMeetingContainer />
