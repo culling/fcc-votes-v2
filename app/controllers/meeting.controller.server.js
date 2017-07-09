@@ -5,7 +5,11 @@ var https = require("https");
 var config      = require("./../../config/config");
 var mongoExport = require("./../../config/mongo");
 
-var MeetingModel   = mongoExport.meetings.MeetingModel;
+//Controlers
+var PollController  = require("./poll.controller.server");
+
+//Models
+var MeetingModel    = mongoExport.meetings.MeetingModel;
 
 
 function clean(obj){
@@ -28,7 +32,10 @@ exports.findAll = function (done){
 
 exports.drop = function(done){
     console.log("drop Hit - Meeting Controller");    
-    MeetingModel.collection.drop(done("dropped"));
+    MeetingModel.collection.drop();
+    //PollModal.collection.drop();
+    PollController.drop();
+    done("dropped Meetings and Polls");
 }
 
 exports.create = function(meeting, done){
@@ -42,3 +49,22 @@ exports.create = function(meeting, done){
     });
 };
 
+exports.delete = function(meetingId, done){
+
+    MeetingModel.findByIdAndRemove(meetingId, function(err, result){
+        if(err){
+            console.error(err)
+            return done(err, null);
+        };
+
+        PollController.find({meeting: meetingId},function(err, polls){
+            polls.map((poll) => {
+                console.log("Poll ID to be deleted");
+                console.log(poll._id);
+                PollController.delete(poll._id);
+            });
+        });
+        //console.log(meetingId);
+        return done(null, err);
+    });
+};

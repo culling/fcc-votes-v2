@@ -84,18 +84,19 @@ class PollCard extends React.Component{
 
     render(){
         return(
-            <div className="poll-card card">
+            <div>
 
-                    {/*Details Button*/}
-                    <button className="vote-question btn btn-block" onClick={this._showPane.bind(this)}> 
-                        {this.props.poll.meeting &&
-                         this.props.poll.meeting.name +" - "+ this.props.poll.question} 
+                {/*Details Button*/}
+                <nav className="vote-question btn btn-block" onClick={this._showPane.bind(this)}> 
+                    {this.props.poll.meeting &&
+                        this.props.poll.meeting.name +" - "+ this.props.poll.question} 
 
-                        {(this.props.poll.meeting == undefined) &&
-                        this.props.poll.question} 
-                    </button>
+                    {(this.props.poll.meeting == undefined) &&
+                    this.props.poll.question} 
+                </nav>
 
 
+                <div className="poll-card card" >
 
                 <div className={this.state.displayState}>
                     <span className="card-title" style={{color: "black"}}>
@@ -110,7 +111,9 @@ class PollCard extends React.Component{
                     <div className="card-part" id="my-graph">
                         {/* Graph */}
                         {this.props.poll.votes.length > 0 && 
+                        <div className="vote-graph">
                             <VoteGraph poll={this.props.poll}  />
+                        </div>
                         }
 
 
@@ -136,6 +139,11 @@ class PollCard extends React.Component{
 
                     {/* Vote Options */}
                     <div className="card-part">
+                        <span className="card-title" style={{color: "black"}}>
+                            Voting Options
+                        </span>
+                        
+                        
                         <ul>
                             <div> {this.props.poll.responseOptions.map( (responseOption, i)=> 
                                 <div key={i} style={{padding: "5px"}}>
@@ -187,15 +195,27 @@ class PollCard extends React.Component{
 
                         <div className={this.state.detailsState}>
                             <div>Question ID: {this.props.poll._id} </div>
-                            <div>Meeting: {this.props.poll.meeting} </div>
+                            {this.props.poll.meeting &&
+                                <div>Meeting: {this.props.poll.meeting.name}</div>
+                            }
+                            {(this.props.poll.meeting == undefined) &&
+                                <div>Meeting: </div>
+                            }
+
                             <div>Poll Created On: {this.props.poll.created} </div>
-                            <div>Poll Created By: {this.props.poll.owner} </div>
-                            {(this.props.user.username == this.props.poll.owner) &&
+                            {this.props.poll.owner &&
+                                <div>Poll Created By: {this.props.poll.owner.username} </div>
+                            }
+                            {(this.props.poll.owner == undefined) &&
+                                <div>Poll Created By: </div>                                
+                            }
+                            {((this.props.poll.owner) && (this.props.user.username == this.props.poll.owner.username)) &&
                                 <button className="btn btn-danger" onClick={this._deletePoll.bind(this)}> DELETE THE POLL </button>
                             }
                         </div>
                     </div>
                     }
+                </div>
 
                 </div>
             </div>

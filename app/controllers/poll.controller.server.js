@@ -33,6 +33,23 @@ exports.findAll = function (done){
 };
 
 
+exports.find = function (findObject, done){
+    console.log("find Hit - Poll Controller");    
+    PollModel.find(findObject)
+        .populate("meeting")
+        .populate("owner")
+        .exec(function(err, foundPolls){
+            if(err){ 
+                console.error(err)
+                done(err, null);
+                return;
+            };
+            done(null, foundPolls);
+        });
+};
+
+
+
 exports.drop = function(done){
     console.log("drop Hit - Poll Controller");    
     PollModel.collection.drop(done("dropped"));

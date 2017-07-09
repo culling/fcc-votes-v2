@@ -70,10 +70,14 @@ nav{
     }
 }
 
-
-
 .card-part{
     break-inside: avoid;
     padding: 10px;
     border-radius: 10px;
+}
+
+
+.vote-graph{
+  display: block;
+  width: 100%
 }

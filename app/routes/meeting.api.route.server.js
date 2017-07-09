@@ -42,6 +42,18 @@ router.post('/', function(req, res){
     });
 });
 
+router.delete("/:id", function(req, res){
+    console.log("/api/meeting/:id - DELETE hit");    
+    var meetingId = req.params.id;
+    //console.log(pollId);
+    meetingController.delete(meetingId, function(err, result){
+        if(err){console.error(err)};
 
+        
+
+        res.write("complete");
+        res.end();
+    });
+});
 
 module.exports = router;

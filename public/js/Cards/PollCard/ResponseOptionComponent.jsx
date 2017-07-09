@@ -9,7 +9,7 @@ class ResponseOptionComponent extends React.Component{
             <div className="responseOption">
 
                 { (this.props.poll.votingOpen == true) && 
-                        <button type="button" className="btn btn-block btn-primary response-option" onClick={this.props.onClick } > {this.props.responseOption} </button>
+                        <nav type="button" className="btn btn-block btn-primary response-option" onClick={this.props.onClick } > {this.props.responseOption} </nav>
                 }
             </div>
         )

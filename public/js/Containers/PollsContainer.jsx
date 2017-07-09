@@ -51,7 +51,9 @@ class PollsContainer extends React.Component{
                 <div>
                     {this.state.polls.map((poll, i)=> {
                         return(
-                            <PollCard key={i} poll={poll} user={this.props.user}  detailsState="details-div-hidden"/>
+                            <div key={i}>
+                                <PollCard key={i} poll={poll} user={this.props.user}  detailsState="details-div-hidden"/>
+                            </div>
                         )
                     } )}
                 </div>
