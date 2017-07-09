@@ -36,7 +36,7 @@ router.get("/", function(req, res){
     }else{
         var user = {
             type: "ip"
-            //,username: req.ip
+            ,username: req.ip
         }
         res.send(user);
     }

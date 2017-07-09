@@ -32,11 +32,11 @@ class VoteGraph extends React.Component{
 
         var svg = d3.select(graphId)
             .append("svg")
-            .attr("width", w)
-            .attr("height", h)
+            .attr("viewBox", "0 0 "+ (w+(xPadding *2) ) +" " + h)
+            .attr("preserveAspectRatio", "xMinYMin meet")
             .append("g")                //make a group to hold our pie chart
-            .attr("transform", "translate(" + r + "," + r + ")");
-
+            .attr("transform", "translate(" + r + "," + r + ")")
+            
         this.svg = svg;
         //console.log(svg);
         this._makeGraph(svg);
