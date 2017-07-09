@@ -1,6 +1,5 @@
 nav{
-  background-color: hsl(190, 50%, 50%);
-
+  background-color: hsl(190, 50%, 40%);
   border-radius: 1em;
 }
 
@@ -44,21 +43,18 @@ nav{
     .poll-card{
         column-count: 2;
         column-gap: 5px;
-
     }
 }
 @media (max-width: 1200px) {
     .poll-card{
         column-count: 2;
         column-gap: 5px;
-
     }
 }
 @media (max-width: 767px) {
     .poll-card{
         column-count: 2;
         column-gap: 5px;
-
     }
 }
 
@@ -66,14 +62,13 @@ nav{
     .poll-card{
         column-count: 1;
         column-gap: 5px;
-
     }
 }
 
 .card-part{
-    break-inside: avoid;
-    padding: 10px;
-    border-radius: 10px;
+  break-inside: avoid;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 
@@ -81,3 +76,22 @@ nav{
   display: block;
   width: 100%
 }
+
+.vote-question{
+  background-color: hsl(190, 50%, 45%);
+  border-radius: 1px;  
+}
+
+:hover.vote-question{
+  background-color: hsl(190, 50%, 50%);
+  border-radius: 1em;  
+}
+
+/*
+.response-option{
+  border: black solid 1px;
+  background-color: hsl(190, 50%, 30%);
+  width: 100%;
+  font: 2em "Open Sans", sans-serif;
+}
+*/

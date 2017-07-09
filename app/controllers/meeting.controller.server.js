@@ -34,9 +34,13 @@ exports.drop = function(done){
     console.log("drop Hit - Meeting Controller");    
     MeetingModel.collection.drop();
     //PollModal.collection.drop();
-    PollController.drop();
-    done("dropped Meetings and Polls");
-}
+    PollController.drop(
+        function(message){
+            done("Dropped Meetings \n" + message);
+        }
+    );
+
+};
 
 exports.create = function(meeting, done){
     console.log("create Hit - Meeting Controller");
@@ -57,7 +61,7 @@ exports.delete = function(meetingId, done){
             return done(err, null);
         };
 
-        PollController.find({meeting: meetingId},function(err, polls){
+        PollController.find({meeting: meetingId}, function(err, polls){
             polls.map((poll) => {
                 console.log("Poll ID to be deleted");
                 console.log(poll._id);

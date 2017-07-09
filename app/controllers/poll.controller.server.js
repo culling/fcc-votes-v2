@@ -52,7 +52,8 @@ exports.find = function (findObject, done){
 
 exports.drop = function(done){
     console.log("drop Hit - Poll Controller");    
-    PollModel.collection.drop(done("dropped"));
+    PollModel.collection.drop();
+    done("Dropped Polls");
 }
 
 exports.create = function(poll, done){
@@ -87,6 +88,6 @@ exports.delete = function(pollId, done){
             console.error(err)
             return done(err, null);
         }
-        return done(null, err);
+        done(null, result);
     });
 }

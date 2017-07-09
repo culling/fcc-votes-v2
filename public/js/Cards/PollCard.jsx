@@ -146,7 +146,7 @@ class PollCard extends React.Component{
                         
                         <ul>
                             <div> {this.props.poll.responseOptions.map( (responseOption, i)=> 
-                                <div key={i} style={{padding: "5px"}}>
+                                <div key={i} className="card-action" style={{padding: "5px"}}>
                                     <ResponseOptionComponent key={i} 
                                     responseOption={responseOption}
                                     onClick = { ()=> this._voteNow({responseOption}, this.props.user.username )}
