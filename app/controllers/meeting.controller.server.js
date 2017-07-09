@@ -28,7 +28,7 @@ exports.findAll = function (done){
 
 exports.drop = function(done){
     console.log("drop Hit - Meeting Controller");    
-    MeetingModel.collection.drop(done());
+    MeetingModel.collection.drop(done("dropped"));
 }
 
 exports.create = function(meeting, done){

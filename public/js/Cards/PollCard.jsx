@@ -89,22 +89,22 @@ class PollCard extends React.Component{
                     {/*Details Button*/}
                     <button className="vote-question btn btn-block" onClick={this._showPane.bind(this)}> 
                         {this.props.poll.meeting &&
-                         this.props.poll.meeting +" - "+ this.props.poll.question} 
+                         this.props.poll.meeting.name +" - "+ this.props.poll.question} 
 
-                        {(this.props.poll.meeting != true) &&
+                        {(this.props.poll.meeting == undefined) &&
                         this.props.poll.question} 
                     </button>
 
 
 
                 <div className={this.state.displayState}>
-                        <span className="card-title" style={{color: "black"}}>
-                            {this.props.poll.meeting &&
-                            this.props.poll.meeting +" - "+ this.props.poll.question} 
+                    <span className="card-title" style={{color: "black"}}>
+                        {this.props.poll.meeting &&
+                        this.props.poll.meeting.name +" - "+ this.props.poll.question} 
 
-                            {(this.props.poll.meeting != true) &&
-                            this.props.poll.question} 
-                        </span>
+                        {(this.props.poll.meeting == undefined) &&
+                        this.props.poll.question}
+                    </span>
 
 
                     <div className="card-part" id="my-graph">
@@ -138,15 +138,19 @@ class PollCard extends React.Component{
                     <div className="card-part">
                         <ul>
                             <div> {this.props.poll.responseOptions.map( (responseOption, i)=> 
-                                <ResponseOptionComponent key={i} 
-                                responseOption={responseOption}
-                                onClick = { ()=> this._voteNow({responseOption}, this.props.user.username )}
-                                poll={this.props.poll} /> )} 
+                                <div key={i} style={{padding: "5px"}}>
+                                    <ResponseOptionComponent key={i} 
+                                    responseOption={responseOption}
+                                    onClick = { ()=> this._voteNow({responseOption}, this.props.user.username )}
+                                    poll={this.props.poll} />
+                                </div>
+                                 )} 
+                                
                             </div>
 
 
                             {/*New Response Option*/}
-                            {this.props.user &&
+                            {(this.props.user.type == "user") &&
                             <div>
                                 {/*<label className="new-response">New Response Option</label>*/}
                                 <div className="input-group">                        
@@ -154,7 +158,7 @@ class PollCard extends React.Component{
                                     ref={(input)=> this.newResponseOption = input} 
                                     ></input>
                                     <span className="input-group-btn">
-                                        <button className="btn btn-block btn-primary" onClick={this._newResponseOption.bind(this)}>Save</button>
+                                        <button className="btn btn-block btn-primary" onClick={this._newResponseOption.bind(this)}>Add Response Option</button>
                                     </span>
                                 </div>
                             </div>
@@ -173,7 +177,7 @@ class PollCard extends React.Component{
 
 
 
-
+                    {(this.props.user.type == "user") &&
                     <div className="card-part">
                         {/*Details Button*/}
                         <button className="vote-question btn btn-block" onClick={this._showDetailsPane.bind(this)}> 
@@ -190,7 +194,9 @@ class PollCard extends React.Component{
                                 <button className="btn btn-danger" onClick={this._deletePoll.bind(this)}> DELETE THE POLL </button>
                             }
                         </div>
-                    </div> 
+                    </div>
+                    }
+
                 </div>
             </div>
         )

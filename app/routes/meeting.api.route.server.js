@@ -11,6 +11,16 @@ var config      = require("./../../config/config");
 //Controllers
 var meetingController = require("./../controllers/meeting.controller.server");
 
+
+router.get('/drop', function(req, res){
+    console.log("/api/meeting/drop - GET hit");
+    meetingController.drop(function(response){
+        res.write(response);
+        res.end();
+    });
+});
+
+
 router.get('/', function(req, res){
     console.log("/api/meeting - GET hit");
     meetingController.findAll(function(found){

@@ -41,12 +41,16 @@ exports.drop = function(done){
 exports.create = function(poll, done){
     console.log("create Hit - Poll Controller");
     var poll = new PollModel(poll);
+
+    console.log(poll);
+
     poll.save(function(err, result){
         if(err){console.error(err);
             return done(err, null);
         }
         done(null, result);
     });
+
 };
 
 exports.update = function (poll, done){

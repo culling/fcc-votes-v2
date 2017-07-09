@@ -71,21 +71,22 @@ class NewPollModal extends React.Component{
         var formDataSerializedArray = jQuery("#NewPollForm").serializeArray();
         var formDataObject = this._objectifyForm(formDataSerializedArray);
         formDataObject.responseOptions = [];
-
-        if (formDataObject.meeting._id == null){
+        
+        if (formDataObject.meeting == null){
             delete formDataObject.meeting
         }
+        
 
         jQuery("#pollname")
                 .add("#question")
                 .add("#password")
                 .val("");
         
-        //console.log(this.state.newPoll);
-
         this.state.newPoll.responseOptions.map((responseOption) =>{
             formDataObject.responseOptions.push(responseOption);
-        } );
+        });
+
+        //console.log(formDataObject);
         
         //console.log(JSON.stringify( formDataObject ));
         jQuery.ajax({
@@ -145,7 +146,8 @@ class NewPollModal extends React.Component{
     }
 
 
-    _editMeeting(){
+    _editMeeting(event){
+        console.log("Edit Meeting fired");
         let newPoll     = Object.assign( this.state.newPoll);
         newPoll.meeting = this.meeting.value;
         console.log("edit Meeting: " + newPoll.meeting);
@@ -165,15 +167,21 @@ class NewPollModal extends React.Component{
 
                    <b>Meeting</b>
                         <div>
-                            <select name="meeting" >
+
+                            <select name="meeting" className="input-field" onChange={  this._editMeeting.bind(this)   }
+                            ref={(input)=> this.meeting = input } 
+                            >
                                 <optgroup label="No Meeting">
+
                                     <option value="none">No Meeting</option>
+
                                 </optgroup>
                                 <optgroup label="Existing Meetings">
 
                                     {this.props.meetings.map((meeting, i) => 
                                         <option key={i} value={meeting._id}>{meeting.name}</option> 
                                     )}
+
                                 </optgroup>
 
                             </select>
