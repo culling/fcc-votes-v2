@@ -155,7 +155,7 @@ class NewPollModal extends React.Component{
                             >
                                 <optgroup label="No Meeting">
 
-                                    <option value="none">No Meeting</option>
+                                    <option value="">No Meeting</option>
 
                                 </optgroup>
                                 <optgroup label="Existing Meetings">

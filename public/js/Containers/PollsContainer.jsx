@@ -12,18 +12,28 @@ class PollsContainer extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            polls: []
+            polls: [],
+            defaultDisplayState: "display-panel-hidden"
         }
     };
 
     componentWillMount(){
         var _this = this;
         //Polls
+
+        var pollId = this.props.pollId || undefined;
+
+
         jQuery.ajax({
             method: 'GET',
             url:"/api/poll",
             success: (polls)=>{
                 var filteredPolls = polls.filter((poll)=>{
+                    if (pollId != undefined ){
+                        _this.setState({defaultDisplayState: "display-panel-visible"});
+                        return (poll._id == pollId);
+                    };
+
                     if(_this.props.filterUser.username == null){
                         return true;
                     };
@@ -62,7 +72,7 @@ class PollsContainer extends React.Component{
                     {this.state.polls.map((poll, i)=> {
                         return(
                             <div key={i}>
-                                <PollCard key={i} poll={poll} user={this.props.user}  detailsState="details-div-hidden"/>
+                                <PollCard key={i} poll={poll} user={this.props.user}  detailsState="details-div-hidden" displayState={this.state.defaultDisplayState}/>
                             </div>
                         )
                     } )}

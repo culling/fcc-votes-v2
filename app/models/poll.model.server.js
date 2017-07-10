@@ -43,12 +43,11 @@ var PollSchema = new Schema ({
     owner:      {
         type:       Schema.Types.ObjectId,
         ref:        "User",
-
-    },    
+    },
     votes:      Array,
     meeting:{
         type:       Schema.Types.ObjectId,
-        ref:        "Meeting"
+        ref:        "Meeting",
     },
     references:{
         type: Array,

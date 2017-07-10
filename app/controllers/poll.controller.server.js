@@ -56,9 +56,11 @@ exports.drop = function(done){
     done("Dropped Polls");
 }
 
-exports.create = function(poll, done){
+exports.create = function(rawPoll, done){
     console.log("create Hit - Poll Controller");
-    var poll = new PollModel(poll);
+    clean(rawPoll);
+    var poll = new PollModel(rawPoll);
+
 
     console.log(poll);
 

@@ -13,7 +13,7 @@ class PollCard extends React.Component{
         super(props);
         this.state = ({
             detailsState: props.detailsState,
-            displayState: "display-panel-hidden"
+            displayState: props.displayState
         });
     };
 
