@@ -12,7 +12,7 @@ class NewPollModal extends React.Component{
             newPoll: {
                 responseOptions: []
             },
-            meetings:[]
+            meetings: props.meetings
         }
     }
 
@@ -21,9 +21,18 @@ class NewPollModal extends React.Component{
             jQuery('.modal').modal();
             jQuery('select').material_select();
         });
+        
+        //this._getMeeting();
+    }
 
-
-        this._getMeeting();
+    componentWillReceiveProps(newProps){
+        console.log("Component will Receive props fired");
+        if(newProps.meetings != this.state.meetings ){
+            console.log("there was a change");
+            this.setState({meetings: newProps.meetings});
+            console.log(this.state.meetings);
+            
+        }
     }
 
     _objectifyForm(formArray) {//serialize data function
@@ -102,7 +111,7 @@ class NewPollModal extends React.Component{
         });
     }
 
-
+    /*
     _getMeeting(){
         var _this = this;
         jQuery.ajax({
@@ -111,20 +120,17 @@ class NewPollModal extends React.Component{
             success: (meetings)=>{
                 var meetingsArray = JSON.parse(meetings);
                 console.log(meetingsArray);
-
                 if(meetingsArray.length == 0 ){
                     meetings = {
                         name:"New Meeting",
                         _id: null
                     }
                 }
-
                 _this.setState({meetings: meetingsArray });
-
             }
         });
     }
-
+    */
 
     _addResponseOption(){ 
         let newPoll = Object.assign( this.state.newPoll);
@@ -178,7 +184,7 @@ class NewPollModal extends React.Component{
                                 </optgroup>
                                 <optgroup label="Existing Meetings">
 
-                                    {this.props.meetings.map((meeting, i) => 
+                                    {this.state.meetings.map((meeting, i) => 
                                         <option key={i} value={meeting._id}>{meeting.name}</option> 
                                     )}
 

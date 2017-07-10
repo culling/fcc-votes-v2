@@ -81,6 +81,7 @@ class ReactContainer extends React.Component{
     };
 
     _getMeetings(){
+        console.log("getMeetings Fired");
         jQuery.ajax({
             method: 'GET',
             url:"/api/meeting",
@@ -159,7 +160,7 @@ class ReactContainer extends React.Component{
                     
                     {(this.state.activeContainer === "#newMeeting-container")&&
                     <div id="newMeeting-container" >
-                            <NewMeetingContainer />
+                            <NewMeetingContainer getMeetings={this._getMeetings.bind(this)} />
                     </div>
                     }
 

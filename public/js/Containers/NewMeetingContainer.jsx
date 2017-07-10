@@ -81,6 +81,7 @@ class NewMeetingContainer extends React.Component{
                 console.log("Success");
                 //_this._getUser();
                 //_this._sendUserMessage(userMessage);
+                _this.props.getMeetings();
             },
             dataType: "text",
             contentType : "application/json"
