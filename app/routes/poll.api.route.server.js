@@ -45,12 +45,14 @@ router.post('/', function(req, res){
 router.delete("/:id", function(req, res){
     console.log("/api/poll/:id - DELETE hit");    
     var pollId = req.params.id;
-    //console.log(pollId);
+
     pollController.delete(pollId, function(err, result){
-        if(err){console.error(err)}
+        if(err){console.error(err)};
+        
         res.write("complete");
         res.end();
     });
+
 });
 
 router.post("/update", function(req, res){

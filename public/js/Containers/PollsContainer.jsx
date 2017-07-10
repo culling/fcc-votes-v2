@@ -14,17 +14,28 @@ class PollsContainer extends React.Component{
         this.state = {
             polls: []
         }
-
     };
 
     componentWillMount(){
+        var _this = this;
         //Polls
         jQuery.ajax({
             method: 'GET',
             url:"/api/poll",
             success: (polls)=>{
-                this.setState({ polls: polls });
-                console.log(polls);
+                var filteredPolls = polls.filter((poll)=>{
+                    if(_this.props.filterUser.username == null){
+                        return true;
+                    };
+
+                    if(poll.owner && (poll.owner.username == _this.props.user.username)){
+                        return true;
+                    };
+                    
+                })
+                this.setState({ polls: filteredPolls });
+                console.log(filteredPolls);
+                
             },
             contentType : "application/json",
             dataType: "JSON"
@@ -35,7 +46,6 @@ class PollsContainer extends React.Component{
         socket.on('new state', function(newState) {
             console.log("new state found");
             //this.setState(newState);
-
         }.bind(this));
    }
 

@@ -65,7 +65,10 @@ exports.delete = function(meetingId, done){
             polls.map((poll) => {
                 console.log("Poll ID to be deleted");
                 console.log(poll._id);
-                PollController.delete(poll._id);
+                PollController.delete(poll._id, function(err, result){
+                    if(err){console.error(err)};
+                    console.log(result);
+                });
             });
         });
         //console.log(meetingId);

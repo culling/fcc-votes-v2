@@ -50,11 +50,13 @@ router.get('/all', function(req, res){
     }) ;
 });
 
+
 router.post("/", function(req, res){
     var newUser = req.body;
     userController.create(newUser);
     res.end();
 });
+
 
 router.put("/", function(req, res){
     let user    = req.body;
@@ -81,8 +83,6 @@ router.put("/", function(req, res){
             }
         );
     };
-    
-
 });
 
 

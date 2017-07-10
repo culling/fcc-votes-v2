@@ -33,8 +33,8 @@ class ReactContainer extends React.Component{
                 "#newPoll-modal",
                 "#meetings-container"
             ],
-            meetings: []
-
+            meetings: [],
+            user: {}
         }
         //Binding to this for functions
         this._setActiveContainer = this._setActiveContainer.bind(this);
@@ -132,9 +132,13 @@ class ReactContainer extends React.Component{
                 </header>
 
                     <NewUserModal />
-                    <LoginUserModal getUser={ this._getUser.bind(this) } />
-                    <NewPollModal   meetings={this.state.meetings} />
-                    
+        
+                    {(this.state.user && (this.state.user.username) ) &&
+                    <div>
+                        <LoginUserModal getUser={ this._getUser.bind(this) } />
+                        <NewPollModal   meetings={this.state.meetings} user={this.state.user} />
+                    </div>
+                    }
 
 
                     {(this.state.activeContainer === "#home-container")&&
@@ -156,6 +160,11 @@ class ReactContainer extends React.Component{
                     </div>
                     }
 
+                    {(this.state.activeContainer === "#my-polls-container")&&
+                    <div id="my-polls-container" >
+                        <PollsContainer     user={this.state.user} filterUser={{username:this.state.user.username, type:this.state.user.type}} />
+                    </div>
+                    }
                     
                     
                     {(this.state.activeContainer === "#newMeeting-container")&&

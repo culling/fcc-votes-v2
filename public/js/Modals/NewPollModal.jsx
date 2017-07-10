@@ -75,7 +75,6 @@ class NewPollModal extends React.Component{
         console.log("Submit Clicked");
 
         let _this = this;
-
         
         var formDataSerializedArray = jQuery("#NewPollForm").serializeArray();
         var formDataObject = this._objectifyForm(formDataSerializedArray);
@@ -84,7 +83,6 @@ class NewPollModal extends React.Component{
         if (formDataObject.meeting == null){
             delete formDataObject.meeting
         }
-        
 
         jQuery("#pollname")
                 .add("#question")
@@ -95,9 +93,8 @@ class NewPollModal extends React.Component{
             formDataObject.responseOptions.push(responseOption);
         });
 
-        //console.log(formDataObject);
-        
-        //console.log(JSON.stringify( formDataObject ));
+        formDataObject.owner = this.user;
+
         jQuery.ajax({
             type: "POST",
             url: "/api/poll",
@@ -109,28 +106,7 @@ class NewPollModal extends React.Component{
             dataType: "text",
             contentType : "application/json"
         });
-    }
-
-    /*
-    _getMeeting(){
-        var _this = this;
-        jQuery.ajax({
-            method: 'GET',
-            url:"/api/meeting",
-            success: (meetings)=>{
-                var meetingsArray = JSON.parse(meetings);
-                console.log(meetingsArray);
-                if(meetingsArray.length == 0 ){
-                    meetings = {
-                        name:"New Meeting",
-                        _id: null
-                    }
-                }
-                _this.setState({meetings: meetingsArray });
-            }
-        });
-    }
-    */
+    };
 
     _addResponseOption(){ 
         let newPoll = Object.assign( this.state.newPoll);
