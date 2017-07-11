@@ -90,11 +90,19 @@ nav{
   border-radius: 1em;  
 }
 
-/*
-.response-option{
-  border: black solid 1px;
-  background-color: hsl(190, 50%, 30%);
-  width: 100%;
-  font: 2em "Open Sans", sans-serif;
+.subtle-debug{
+  color: hsl(190, 50%, 90%);
+  font-size: 0.5em;
 }
-*/
+
+.home-logo-div{
+  position: absolute;
+  top: 50%;
+  transform:  translateY(-50%);    
+}
+
+.home-text{
+  position: relative;
+  text-align: center;
+  color: hsl(190, 70%, 20%);
+}

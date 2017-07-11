@@ -36,14 +36,17 @@ class HomeContainer extends React.Component{
     render(){
         return(
             <div id="home-container" className="home-container">
-                <b>Home </b>
-                {(this.props.user) &&
+                {(this.props.user && (this.props.user.type == "user")) &&
                 <div id="welcome-message">
                     
                     Welcome {this.props.user.username} 
                     
                 </div>
                 }
+                <div className="home-logo-div container">
+                    <h3 className="home-text" >Vote Tracker</h3>
+                <h5 className="home-text" >Free Code Camp - Build a Voting Application<span className="fa fa-th-list prefix"></span></h5>
+                </div>
             </div>
         )
     }
