@@ -68,6 +68,7 @@ class PrimaryNavbar extends React.Component{
 
     _pollsClicked(){
         console.log("Polls Clicked");
+        
         this._showContainer("#polls-container");
     }
 
@@ -93,17 +94,17 @@ class PrimaryNavbar extends React.Component{
 
                             <li  onClick={ this._homeClicked.bind(this)}><a href="?">Home</a></li>
 
-                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>}
+                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._profileClicked.bind(this)}><a href="#">Profile</a></li>}
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._newMeetingClicked.bind(this)}><a href="#" >New Meeting</a></li>}
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._newPollClicked.bind(this)}><a href="#" >New Poll</a></li>}
 
-                            <li  onClick={ this._meetingsClicked.bind(this)}><a >Meetings</a></li>
+                            <li  onClick={ this._meetingsClicked.bind(this)}><a href="#">Meetings</a></li>
 
-                            <li  onClick={ this._pollsClicked.bind(this)}><a >Polls</a></li>
+                            <li  onClick={ this._pollsClicked.bind(this)}><a href="#">Polls</a></li>
 
-                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._myPollsClicked.bind(this)}><a href="?" >My Polls</a></li>}
+                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._myPollsClicked.bind(this)}><a href="#" >My Polls</a></li>}
 
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="#" >Log In</a></li>}
@@ -114,19 +115,21 @@ class PrimaryNavbar extends React.Component{
 
                         </ul>
                         <ul className="side-nav" id="mobile-menu">
-                            <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
+
+                            <li  onClick={ this._homeClicked.bind(this)}><a href="?">Home</a></li>
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>}
 
-                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._newMeetingClicked.bind(this)}><a href="#" >New Meeting</a></li>}
+                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._newMeetingClicked.bind(this)}><a href="?" >New Meeting</a></li>}
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._newPollClicked.bind(this)}><a href="#" >New Poll</a></li>}
 
-                            <li  onClick={ this._meetingsClicked.bind(this)}><a >Meetings</a></li>
+                            <li  onClick={ this._meetingsClicked.bind(this)}><a href="?">Meetings</a></li>
 
-                            <li  onClick={ this._pollsClicked.bind(this)}><a >Polls</a></li>
+                            <li  onClick={ this._pollsClicked.bind(this)}><a href="?">Polls</a></li>
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._myPollsClicked.bind(this)}><a href="#" >My Polls</a></li>}
+
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="#" >Log In</a></li>}
 

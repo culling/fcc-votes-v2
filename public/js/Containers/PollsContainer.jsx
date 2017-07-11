@@ -21,7 +21,18 @@ class PollsContainer extends React.Component{
         var _this = this;
         //Polls
 
-        var pollId = this.props.pollId || undefined;
+        jQuery.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results==null){
+            return null;
+            }
+            else{
+            return decodeURI(results[1]) || 0;
+            }
+        }
+        var pollId = jQuery.urlParam('pollId') || undefined;
+        //this.setState({pollId: pollId});
+
 
 
         jQuery.ajax({
@@ -42,7 +53,7 @@ class PollsContainer extends React.Component{
                         return true;
                     };
                     
-                })
+                });
                 this.setState({ polls: filteredPolls });
                 console.log(filteredPolls);
                 

@@ -34,7 +34,8 @@ class ReactContainer extends React.Component{
                 "#meetings-container"
             ],
             meetings: [],
-            user: {}
+            user: {},
+            pollId: undefined
         }
         //Binding to this for functions
         this._setActiveContainer = this._setActiveContainer.bind(this);
@@ -45,6 +46,7 @@ class ReactContainer extends React.Component{
     };
 
     componentWillMount(){
+
         this._getUser.bind(this);
         this._getUser();
 
@@ -105,11 +107,32 @@ class ReactContainer extends React.Component{
             contentType : "application/json",
             dataType: "JSON"
         });
+        this._getPollId(function(pollId){
+            if(pollId != undefined){
+                this._setActiveContainer("#polls-container");
+            }
+        });
     };
+
+    _getPollId(done){
+        jQuery.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results==null){
+            return null;
+            }
+            else{
+            return decodeURI(results[1]) || 0;
+            }
+        }
+        var pollId = jQuery.urlParam('pollId') || undefined;
+        done(pollId);
+    }
 
     _setActiveContainer(newActiveContainerId){
         console.log("Active Container ID changed");
         //Show active container
+
+
         jQuery(newActiveContainerId)
             .attr("class", "div-visible");
         
