@@ -217,8 +217,9 @@ class PollCard extends React.Component{
                     </div>
                     }
 
-                    
-                    <SharePanel poll={this.props.poll} />
+                    {(this.props.user.type == "user") &&
+                    <SharePanel poll={this.props.poll} user={this.props.user} />
+                    }
                 </div>
                 </div>
             </div>

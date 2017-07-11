@@ -31,21 +31,21 @@ class ReactContainer extends React.Component{
                 "#profile-container",
                 "#polls-container",
                 "#newPoll-modal",
-                "#meetings-container"
+                "#meetings-container",
+                "#open-poll-container"
             ],
             meetings: [],
-            user: {},
-            pollId: undefined
+            user: {}
         }
         //Binding to this for functions
         this._setActiveContainer = this._setActiveContainer.bind(this);
         this._getUser            = this._getUser.bind(this);
         this._getPolls          = this._getPolls.bind(this);
         this._getMeetings       = this._getMeetings.bind(this);
-        
     };
 
     componentWillMount(){
+
 
         this._getUser.bind(this);
         this._getUser();
@@ -55,6 +55,9 @@ class ReactContainer extends React.Component{
 
         this._getPolls.bind(this);
         this._getPolls();
+
+        this._getPollId();
+
     }
 
     componentDidMount(){
@@ -62,6 +65,7 @@ class ReactContainer extends React.Component{
             console.log("new state found");
             //this.setState(newState);
         }.bind(this));
+
     }
 
     componentWillUnmount(){
@@ -97,45 +101,47 @@ class ReactContainer extends React.Component{
     };
 
     _getPolls(){
+        var _this = this;
+
         jQuery.ajax({
             method: 'GET',
             url:"/api/poll",
             success: (polls)=>{
-                this.setState({ polls: polls });
-                console.log(polls);
+                _this.setState({ polls: polls });
+                //console.log(polls);
             },
             contentType : "application/json",
             dataType: "JSON"
         });
-        this._getPollId(function(pollId){
-            if(pollId != undefined){
-                this._setActiveContainer("#polls-container");
-            }
-        });
     };
 
-    _getPollId(done){
+
+    _getPollId(){
         jQuery.urlParam = function(name){
             var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
             if (results==null){
-            return null;
+                return null;
             }
             else{
-            return decodeURI(results[1]) || 0;
+                return decodeURI(results[1]) || 0;
             }
-        }
+        };
+
         var pollId = jQuery.urlParam('pollId') || undefined;
-        done(pollId);
-    }
+        
+        if(pollId != undefined){
+            this.setState({pollId: pollId});
+            this._setActiveContainer("#open-polls-container");
+        };
+    };
 
     _setActiveContainer(newActiveContainerId){
         console.log("Active Container ID changed");
         //Show active container
 
-
         jQuery(newActiveContainerId)
             .attr("class", "div-visible");
-        
+
         this.setState({activeContainer: newActiveContainerId});
         //console.log(this.state.activeContainer);
     }
@@ -182,6 +188,15 @@ class ReactContainer extends React.Component{
                         <PollsContainer     user={this.state.user} filterUser={{username:null, type:"all"}} />
                     </div>
                     }
+
+
+                    {((this.state.activeContainer === "#open-polls-container") && (this.state.pollId != undefined ) )&&
+                    <div id="open-polls-container" >
+                        <PollsContainer     user={this.state.user} filterUser={{username:null, type:"all"}} pollId={this.state.pollId } />
+                    </div>
+                    }
+
+
 
                     {(this.state.activeContainer === "#my-polls-container")&&
                     <div id="my-polls-container" >

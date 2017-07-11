@@ -1,5 +1,3 @@
-// /login/twitter
-
 import React from 'react';
 import {render} from 'react-dom';
 
@@ -68,7 +66,7 @@ class PrimaryNavbar extends React.Component{
 
     _pollsClicked(){
         console.log("Polls Clicked");
-        
+
         this._showContainer("#polls-container");
     }
 
@@ -130,13 +128,11 @@ class PrimaryNavbar extends React.Component{
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._myPollsClicked.bind(this)}><a href="#" >My Polls</a></li>}
 
-
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="#" >Log In</a></li>}
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._signupClicked.bind(this)}><a href="#">Sign Up</a></li>}
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>}
-
 
                         </ul>
                     </div>

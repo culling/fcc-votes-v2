@@ -20,7 +20,7 @@ class PollsContainer extends React.Component{
     componentWillMount(){
         var _this = this;
         //Polls
-
+        /*
         jQuery.urlParam = function(name){
             var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
             if (results==null){
@@ -31,7 +31,7 @@ class PollsContainer extends React.Component{
             }
         }
         var pollId = jQuery.urlParam('pollId') || undefined;
-        //this.setState({pollId: pollId});
+        */
 
 
 
@@ -40,9 +40,9 @@ class PollsContainer extends React.Component{
             url:"/api/poll",
             success: (polls)=>{
                 var filteredPolls = polls.filter((poll)=>{
-                    if (pollId != undefined ){
+                    if (this.props.pollId != undefined ){
                         _this.setState({defaultDisplayState: "display-panel-visible"});
-                        return (poll._id == pollId);
+                        return (poll._id == this.props.pollId);
                     };
 
                     if(_this.props.filterUser.username == null){

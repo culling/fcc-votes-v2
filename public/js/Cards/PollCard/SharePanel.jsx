@@ -12,8 +12,20 @@ class SharePanel extends React.Component{
     render(){
         return(
             <div className="share-panel">
-                <a href={"/?pollId=" + this.props.poll._id }>Direct Link</a>
-
+            {/*Share It*/}
+            
+                <div className="button-bar ">
+                    <a href={"https://twitter.com/intent/tweet?url=" + 
+                        "http://" + window.location.host +
+                        "/?pollId="+this.props.poll._id + 
+                        "&amp;text=" + this.props.poll.question 
+                        } className="btn btn-block">
+                        
+                        <i className="fa fa-twitter"></i> 
+                        Share on Twitter
+                    </a>
+                </div>
+                
             </div>
         )
     }
