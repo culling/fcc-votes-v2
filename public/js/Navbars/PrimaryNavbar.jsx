@@ -24,6 +24,7 @@ class PrimaryNavbar extends React.Component{
 
     _homeClicked(){
         console.log("Home Clicked");
+        
         this._showContainer("#home-container");
         //this._showContainer("#allBoard-container");
     }
@@ -90,7 +91,7 @@ class PrimaryNavbar extends React.Component{
                         <a href="#" data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
 
-                            <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
+                            <li  onClick={ this._homeClicked.bind(this)}><a href="?">Home</a></li>
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>}
 
@@ -102,7 +103,7 @@ class PrimaryNavbar extends React.Component{
 
                             <li  onClick={ this._pollsClicked.bind(this)}><a >Polls</a></li>
 
-                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._myPollsClicked.bind(this)}><a href="#" >My Polls</a></li>}
+                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._myPollsClicked.bind(this)}><a href="?" >My Polls</a></li>}
 
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type!= "user" ) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="#" >Log In</a></li>}

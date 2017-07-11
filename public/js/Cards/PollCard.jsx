@@ -6,7 +6,8 @@ import * as d3 from 'd3';
 
 //Components
 import ResponseOptionComponent from './PollCard/ResponseOptionComponent.jsx';
-import VoteGraph from './PollCard/VoteGraph.jsx';
+import VoteGraph    from './PollCard/VoteGraph.jsx';
+import SharePanel   from './PollCard/SharePanel.jsx';
 
 class PollCard extends React.Component{
     constructor (props){
@@ -215,8 +216,10 @@ class PollCard extends React.Component{
                         </div>
                     </div>
                     }
-                </div>
 
+                    
+                    <SharePanel poll={this.props.poll} />
+                </div>
                 </div>
             </div>
         )
