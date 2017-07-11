@@ -92,8 +92,6 @@ class PrimaryNavbar extends React.Component{
 
                             <li  onClick={ this._homeClicked.bind(this)}><a href="?">Home</a></li>
 
-                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._profileClicked.bind(this)}><a href="#">Profile</a></li>}
-
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._newMeetingClicked.bind(this)}><a href="#" >New Meeting</a></li>}
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) &&<li  onClick={ this._newPollClicked.bind(this)}><a href="#" >New Poll</a></li>}
@@ -115,8 +113,6 @@ class PrimaryNavbar extends React.Component{
                         <ul className="side-nav" id="mobile-menu">
 
                             <li  onClick={ this._homeClicked.bind(this)}><a href="?">Home</a></li>
-
-                            {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._profileClicked.bind(this)}><a href="#">Profile</a></li>}
 
                             {( (this.props.user)&& (this.props.user.type) && (this.props.user.type== "user" ) ) && <li  onClick={ this._newMeetingClicked.bind(this)}><a href="#" >New Meeting</a></li>}
 

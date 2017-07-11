@@ -33,7 +33,8 @@ class PollCard extends React.Component{
         let poll     = Object.assign( this.props.poll);
         jQuery.ajax({
             type: 'DELETE',
-            dataType: 'json',
+            dataType: "text",
+            contentType : "application/json",
             url:("/api/poll/" + this.props.poll._id),
             data: JSON.stringify({ poll }),
             success:(

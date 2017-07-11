@@ -179,7 +179,7 @@ class ReactContainer extends React.Component{
 
                     {(this.state.activeContainer === "#meetings-container")&&
                     <div id="meetings-container" >
-                        <MeetingsContainer     user={this.state.user}  />
+                        <MeetingsContainer     user={this.state.user}  meetings={this.state.meetings} getMeetings={this._getMeetings.bind(this) } />
                     </div>
                     }
 
@@ -207,7 +207,7 @@ class ReactContainer extends React.Component{
                     
                     {(this.state.activeContainer === "#newMeeting-container")&&
                     <div id="newMeeting-container" >
-                            <NewMeetingContainer getMeetings={this._getMeetings.bind(this)} />
+                            <NewMeetingContainer getMeetings={this._getMeetings.bind(this)} user={this.state.user} />
                     </div>
                     }
 

@@ -12,7 +12,7 @@ class MeetingsContainer extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            meetings: []
+            meetings: props.meetings
         }
     };
 
@@ -20,16 +20,7 @@ class MeetingsContainer extends React.Component{
     componentWillMount(){
         console.log("meetings container");
         //Meetings
-        jQuery.ajax({
-            method: 'GET',
-            url:"/api/meeting",
-            success: (meetings)=>{
-                this.setState({ meetings: meetings });
-                console.log(meetings);
-            },
-            contentType : "application/json",
-            dataType: "JSON"
-        });
+        this.props.getMeetings
    }
 
 
@@ -53,7 +44,10 @@ class MeetingsContainer extends React.Component{
                 <div>
                     {this.state.meetings.map((meeting, i)=> {
                         return(
-                            <MeetingCard key={i} meeting={meeting} user={this.props.user}  detailsState="details-div-visible"/>
+                            <MeetingCard key={i} meeting={meeting} user={this.props.user} 
+                             detailsState="details-div-visible" 
+                             getMeetings={this.props.getMeetings}
+                            />
                         )
                     } )}
                 </div>

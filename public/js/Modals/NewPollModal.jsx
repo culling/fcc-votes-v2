@@ -28,10 +28,9 @@ class NewPollModal extends React.Component{
     componentWillReceiveProps(newProps){
         console.log("Component will Receive props fired");
         if(newProps.meetings != this.state.meetings ){
-            console.log("there was a change");
+            //console.log("there was a change");
             this.setState({meetings: newProps.meetings});
-            console.log(this.state.meetings);
-            
+            //console.log(this.state.meetings);
         }
     }
 

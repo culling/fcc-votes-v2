@@ -16,16 +16,22 @@ class MeetingCard extends React.Component{
     }
 
     _deleteMeeting(){
+        let _this = this;
         let meeting     = Object.assign( this.props.meeting);
+        let thisMeetingCardId = "#meeting-card-"+ this.props.meeting._id;
+        console.log(thisMeetingCardId);
         jQuery.ajax({
             type: 'DELETE',
-            dataType: 'json',
             url:("/api/meeting/" + this.props.meeting._id),
             data: JSON.stringify({ meeting }),
-            success:(
-                //window.location="/"
-                console.log("success - deleted")
-            )
+            success:function (){
+                console.log("success - deleted");
+                _this.props.getMeetings();
+                jQuery(thisMeetingCardId)
+                    .attr("class", "div-hidden");
+            },
+            dataType: "text",
+            contentType : "application/json"
         });
     }
 
@@ -33,6 +39,7 @@ class MeetingCard extends React.Component{
 
     render(){
         return(
+            <div id={"meeting-card-" + this.props.meeting._id}>
             <div className="meeting-card card">
 
                 <div className="card-part">
@@ -49,11 +56,8 @@ class MeetingCard extends React.Component{
                         {((this.props.meeting.owner)&& (this.props.meeting.owner.username)) &&
                             <div>Meeting Created By: {this.props.meeting.owner.username} </div>
                         }
-                        {this.props.meeting.owner &&
-                            <div>Meeting Created By: {this.props.meeting.owner.username} </div>
-                        }
 
-                        {/*(this.props.user.username && (this.props.user.username == this.props.meeting.owner.username) )&& */
+                        {(this.props.user.username && (this.props.user.username == this.props.meeting.owner.username) )&& 
                             <button className="btn btn-danger" onClick={this._deleteMeeting.bind(this)}> DELETE THE MEETING </button>
                         }
                     </div>
@@ -61,6 +65,7 @@ class MeetingCard extends React.Component{
 
 
                 
+            </div>
             </div>
         )
     }

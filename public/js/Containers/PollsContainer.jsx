@@ -19,21 +19,6 @@ class PollsContainer extends React.Component{
 
     componentWillMount(){
         var _this = this;
-        //Polls
-        /*
-        jQuery.urlParam = function(name){
-            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-            if (results==null){
-            return null;
-            }
-            else{
-            return decodeURI(results[1]) || 0;
-            }
-        }
-        var pollId = jQuery.urlParam('pollId') || undefined;
-        */
-
-
 
         jQuery.ajax({
             method: 'GET',
@@ -52,11 +37,9 @@ class PollsContainer extends React.Component{
                     if(poll.owner && (poll.owner.username == _this.props.user.username)){
                         return true;
                     };
-                    
                 });
                 this.setState({ polls: filteredPolls });
                 console.log(filteredPolls);
-                
             },
             contentType : "application/json",
             dataType: "JSON"

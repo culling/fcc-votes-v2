@@ -23,7 +23,9 @@ function clean(obj){
 
 exports.findAll = function (done){
     console.log("findAll Hit - Meeting Controller");    
-    MeetingModel.find({},function(err, foundMeetings){
+    MeetingModel.find()
+        .populate("owner")
+        .exec(function(err, foundMeetings){
         if(err){ console.error(err)};
         done(foundMeetings);
     });
@@ -72,6 +74,6 @@ exports.delete = function(meetingId, done){
             });
         });
         //console.log(meetingId);
-        return done(null, err);
+        return done(null, "deleted meeting");
     });
 };

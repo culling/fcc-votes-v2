@@ -65,7 +65,10 @@ class NewMeetingContainer extends React.Component{
         var formDataSerializedArray = jQuery("#NewMeetingForm").serializeArray();
         var formDataObject = this._objectifyForm(formDataSerializedArray);
         formDataObject.responseOptions = [];
-        //formDataObject.owner = this.props.user._id;
+        formDataObject.owner = this.props.user._id;
+        
+
+        
         jQuery("#name")
             .val("");
         
