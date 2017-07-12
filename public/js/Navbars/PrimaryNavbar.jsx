@@ -54,8 +54,8 @@ class PrimaryNavbar extends React.Component{
 
     _newPollClicked(){
         console.log("new Poll Clicked");
-        //this._showContainer("#newPoll-container");
-        jQuery('#new-poll-modal').modal('open');
+        this._showContainer("#new-poll-container");
+        //jQuery('#new-poll-modal').modal('open');
         //this._hideAllContainers();
     };
 

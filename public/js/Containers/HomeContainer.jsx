@@ -44,8 +44,8 @@ class HomeContainer extends React.Component{
                 </div>
                 }
                 <div className="home-logo-div container">
-                    <h3 className="home-text" >Vote Tracker</h3>
-                <h5 className="home-text" >Free Code Camp - Build a Voting Application<span className="fa fa-th-list prefix"></span></h5>
+                    <h3 className="home-text" >Vote Tracker <span className="fa fa-check-square-o prefix"></span> </h3>
+                <h5 className="home-text" >Free Code Camp - Build a Voting Application  </h5>
                 </div>
             </div>
         )

@@ -10,9 +10,8 @@ class NewMeetingContainer extends React.Component{
     }
 
     componentWillMount(){
-        jQuery( document ).ready(function(){
-            jQuery('.modal').modal();
-        });
+
+
     }
 
     _objectifyForm(formArray) {//serialize data function
@@ -70,6 +69,7 @@ class NewMeetingContainer extends React.Component{
 
         
         jQuery("#name")
+            .add("#purpose")
             .val("");
         
         //console.log(this.state.newMeeting);
@@ -105,11 +105,15 @@ class NewMeetingContainer extends React.Component{
 
 
                         <div className="input-field">
-                            <i className="material-icons prefix"> </i>
                             <input type="text" name="name" id="name" required/>
                             <label htmlFor="name">Name</label>
                         </div>
 
+
+                        <div className="input-field">
+                            <textarea name="purpose" id="purpose" className="materialize-textarea"></textarea>
+                            <label htmlFor="purpose">Purpose</label>
+                        </div>
 
 
                 </div>

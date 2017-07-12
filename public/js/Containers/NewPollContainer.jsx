@@ -3,9 +3,9 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import ResponseOption from './NewPollModal/ResponseOption.jsx';
+import ResponseOption from './NewPollContainer/ResponseOption.jsx';
 
-class NewPollModal extends React.Component{
+class NewPollContainer extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -18,7 +18,7 @@ class NewPollModal extends React.Component{
 
     componentWillMount(){
         jQuery(document).ready(function() {
-            jQuery('.modal').modal();
+            //jQuery('.modal').modal();
             jQuery('select').material_select();
         });
         
@@ -30,6 +30,7 @@ class NewPollModal extends React.Component{
         if(newProps.meetings != this.state.meetings ){
             //console.log("there was a change");
             this.setState({meetings: newProps.meetings});
+            jQuery('select').material_select();
             //console.log(this.state.meetings);
         }
     }
@@ -139,7 +140,7 @@ class NewPollModal extends React.Component{
 
     render(){
         return(
-            <div id="new-poll-modal" className="modal">
+            <div id="new-poll-container" >
                 <form id="NewPollForm"   >
                 <div className="modal-content">
                     <h4>New poll</h4>
@@ -158,11 +159,9 @@ class NewPollModal extends React.Component{
 
                                 </optgroup>
                                 <optgroup label="Existing Meetings">
-
                                     {this.state.meetings.map((meeting, i) => 
                                         <option key={i} value={meeting._id}>{meeting.name}</option> 
                                     )}
-
                                 </optgroup>
 
                             </select>
@@ -217,4 +216,4 @@ class NewPollModal extends React.Component{
 
 
 
-export default NewPollModal;
+export default NewPollContainer;

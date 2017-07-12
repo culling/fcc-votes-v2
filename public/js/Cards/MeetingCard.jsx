@@ -57,7 +57,7 @@ class MeetingCard extends React.Component{
                             <div>Meeting Created By: {this.props.meeting.owner.username} </div>
                         }
 
-                        {(this.props.user.username && (this.props.user.username == this.props.meeting.owner.username) )&& 
+                        {(this.props.user.username && this.props.meeting.owner && (this.props.user.username == this.props.meeting.owner.username) )&& 
                             <button className="btn btn-danger" onClick={this._deleteMeeting.bind(this)}> DELETE THE MEETING </button>
                         }
                     </div>

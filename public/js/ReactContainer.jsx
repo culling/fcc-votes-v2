@@ -8,17 +8,17 @@ import {render} from 'react-dom';
 import PrimaryNavbar    from './Navbars/PrimaryNavbar.jsx';
 
 //Containers
-import HomeContainer    from "./Containers/HomeContainer.jsx";
-import ProfileContainer from "./Containers/ProfileContainer.jsx";
-import PollsContainer   from "./Containers/PollsContainer.jsx";
-import MeetingsContainer   from "./Containers/MeetingsContainer.jsx";
-import NewMeetingContainer from "./Containers/NewMeetingContainer.jsx";
-
+import HomeContainer        from "./Containers/HomeContainer.jsx";
+import ProfileContainer     from "./Containers/ProfileContainer.jsx";
+import PollsContainer       from "./Containers/PollsContainer.jsx";
+import MeetingsContainer    from "./Containers/MeetingsContainer.jsx";
+import NewMeetingContainer  from "./Containers/NewMeetingContainer.jsx";
+import NewPollContainer     from "./Containers/NewPollContainer.jsx";
 
 //Modals
 import NewUserModal     from "./Modals/NewUserModal.jsx";
 import LoginUserModal   from "./Modals/LoginUserModal.jsx";
-import NewPollModal     from "./Modals/NewPollModal.jsx";
+
 
 class ReactContainer extends React.Component{
 
@@ -151,10 +151,10 @@ class ReactContainer extends React.Component{
         return(
             <div>
                 <header>
-                <b></b>
+
                 <PrimaryNavbar user={this.state.user} setActiveContainer={  this._setActiveContainer.bind(this) } />
                     {this.state.user &&
-                        <div>
+                        <div className="subtle-debug">
                             <b>Current User {this.state.user.username}</b>
                         </div>
                     }
@@ -165,14 +165,17 @@ class ReactContainer extends React.Component{
                     {(this.state.user && (this.state.user.username) ) &&
                     <div>
                         <LoginUserModal getUser={ this._getUser.bind(this) } />
-                        <NewPollModal   meetings={this.state.meetings} user={this.state.user} />
                     </div>
                     }
 
+                    
+
+                    
 
                     {(this.state.activeContainer === "#home-container")&&
                     <HomeContainer          user={this.state.user} twitterUser={this.state.twitterUser} />
                     }
+
                     {(this.state.activeContainer === "#profile-container")&&
                     <ProfileContainer       user={this.state.user} getUser={ this._getUser.bind(this) } />
                     }
@@ -204,13 +207,18 @@ class ReactContainer extends React.Component{
                     </div>
                     }
                     
-                    
+                    {(this.state.activeContainer === "#new-poll-container")&&
+                    <div id="new-poll-container" >
+                        <NewPollContainer   meetings={this.state.meetings} user={this.state.user} />                        
+                    </div>
+                    }
+
                     {(this.state.activeContainer === "#newMeeting-container")&&
                     <div id="newMeeting-container" >
                             <NewMeetingContainer getMeetings={this._getMeetings.bind(this)} user={this.state.user} />
                     </div>
                     }
-
+                    
             </div>
         )
     }
